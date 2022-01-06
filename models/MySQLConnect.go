@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -18,5 +19,10 @@ func init() {
 		mysqladmin+":"+mysqlpwd+"@/"+mysqldb+"?charset=utf8"+
 			"&parseTime=True&loc=Local",
 	)
-
+	if err != nil {
+		logs.Error(err)
+		logs.Error("连接Msql数据库失败")
+	} else {
+		logs.Info("连接Mysql数据库成功")
+	}
 }
