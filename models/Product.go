@@ -1,5 +1,5 @@
 package models
 
-func main() {
-
+type Product struct {
+	Id string
 }
