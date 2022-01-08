@@ -2,7 +2,7 @@ package models
 
 type User struct {
 	Id       int
-	phone    string
+	Phone    string
 	Password string
 	AddTime  int
 	LastIp   string
