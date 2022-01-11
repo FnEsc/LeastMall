@@ -27,8 +27,11 @@ func (c cookie) Get(ctx *context.Context, key string, obj interface{}) bool {
 	if !ok {
 		return false
 	}
-	json.Unmarshal([]byte(tempData), obj)
-	return true
+	if err := json.Unmarshal([]byte(tempData), obj); err != nil {
+		return true
+	} else {
+		return false
+	}
 }
 
 // Cookie 实例化结构体
