@@ -11,13 +11,13 @@ type AuthController struct {
 	BaseController
 }
 
-func (c AuthController) Login() {
+func (c *AuthController) Login() {
 	c.Data["prevPage"] = c.Ctx.Request.Referer()
 	c.TplName = "frontend/auth/login.html"
 }
 
 // GoLogin 登录
-func (c AuthController) GoLogin() {
+func (c *AuthController) GoLogin() {
 	phone := c.GetString("phone")
 	password := c.GetString("password")
 	phoneCode := c.GetString("phoneCode")
@@ -53,18 +53,18 @@ func (c AuthController) GoLogin() {
 }
 
 // GoLogout 退出登录
-func (c AuthController) GoLogout() {
+func (c *AuthController) GoLogout() {
 	models.Cookie.Remove(c.Ctx, "userinfo", "")
 	c.Redirect(c.Ctx.Request.Referer(), 302)
 }
 
 // RegisterStep1 注册第一步 重定向至注册页面
-func (c AuthController) RegisterStep1() {
+func (c *AuthController) RegisterStep1() {
 	c.TplName = "frontend/auth/register_step1.html"
 }
 
 // RegisterStep2 注册第二步 校验图形验证码
-func (c AuthController) RegisterStep2() {
+func (c *AuthController) RegisterStep2() {
 	sign := c.GetString("sign")
 	phoneCode := c.GetString("phoneCode")
 	// 验证图形验证码和前面是否已知
@@ -86,7 +86,7 @@ func (c AuthController) RegisterStep2() {
 }
 
 // RegisterStep3 注册第三步 校验短信验证码
-func (c AuthController) RegisterStep3() {
+func (c *AuthController) RegisterStep3() {
 	sign := c.GetString("sign")
 	smsCode := c.GetString("smsCode")
 	sessionSmsCode := c.GetString("smsCode")
@@ -107,7 +107,7 @@ func (c AuthController) RegisterStep3() {
 }
 
 // SendCode 发送短信验证码
-func (c AuthController) SendCode() {
+func (c *AuthController) SendCode() {
 	phone := c.GetString("phone")
 	phoneCode := c.GetString("phoneCode")
 	phoneCodeId := c.GetString("phoneCodeId")
@@ -223,7 +223,7 @@ func (c AuthController) SendCode() {
 }
 
 // ValidateSmsCode 校验短信验证码
-func (c AuthController) ValidateSmsCode() {
+func (c *AuthController) ValidateSmsCode() {
 	sign := c.GetString("sign")
 	smsCode := c.GetString("smsCode")
 
@@ -267,7 +267,7 @@ func (c AuthController) ValidateSmsCode() {
 }
 
 // GoRegister 注册操作
-func (c AuthController) GoRegister() {
+func (c *AuthController) GoRegister() {
 	sign := c.GetString("sign")
 	smsCode := c.GetString("smsCode")
 	password := c.GetString("password")
