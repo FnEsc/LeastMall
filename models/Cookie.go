@@ -15,6 +15,12 @@ func (c cookie) Set(ctx *context.Context, key string, value interface{}) {
 	ctx.SetSecureCookie(beego.AppConfig.String("secureCookie"), key, string(bytes), 3600*24*30, "/", beego.AppConfig.String("domain"), nil, true)
 }
 
+// Remove 删除数据的方法
+func (c cookie) Remove(ctx *context.Context, key string, value interface{}) {
+	bytes, _ := json.Marshal(value)
+	ctx.SetSecureCookie(beego.AppConfig.String("secureCookie"), key, string(bytes), -1, "/", beego.AppConfig.String("domain"), nil, true)
+}
+
 // Get 获取数据的方法
 func (c cookie) Get(ctx *context.Context, key string, obj interface{}) bool {
 	tempData, ok := ctx.GetSecureCookie("secureCookie", key)
