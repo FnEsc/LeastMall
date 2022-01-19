@@ -8,7 +8,10 @@ require (
 	github.com/gomarkdown/markdown v0.0.0-20211212230626-5af6ad2f47df
 	github.com/hunterhug/go_image v1.0.1
 	github.com/jinzhu/gorm v1.9.16
+	github.com/objcoding/wxpay v1.0.6
 	github.com/olivere/elastic/v7 v7.0.31
+	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
+	github.com/smartwalle/alipay/v3 v3.1.6
 	github.com/smartystreets/goconvey v1.6.4
 )
 
@@ -22,6 +25,7 @@ require (
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect
+	github.com/smartwalle/crypto4go v1.0.2 // indirect
 	github.com/smartystreets/assertions v1.1.1 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/net v0.0.0-20211209124913-491a49abca63 // indirect
