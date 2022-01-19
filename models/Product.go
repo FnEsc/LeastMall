@@ -14,6 +14,7 @@ type Product struct {
 	ProductAttr     string
 	ProductVersion  string
 	ProductImg      string
+	ProductFitting  string
 	ProductGift     string
 	ProductColor    string
 	ProductKeywords string
