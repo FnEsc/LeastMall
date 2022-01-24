@@ -3,6 +3,7 @@ package backend
 import (
 	"LeastMall/common"
 	"LeastMall/models"
+	"strconv"
 	"strings"
 )
 
@@ -80,5 +81,54 @@ func (c *AdministratorController) Edit() {
 }
 
 func (c *AdministratorController) GoEdit() {
+	id, err := c.GetInt("id")
+	if err != nil {
+		c.Error("GoEdit 传入id参数错误", "/administrator")
+		return
+	}
+	username := strings.Trim(c.GetString("username"), "")
+	password := strings.Trim(c.GetString("password"), "")
+	mobile := strings.Trim(c.GetString("mobile"), "")
+	email := strings.Trim(c.GetString("email"), "")
+	roleId, err1 := c.GetInt("roleId")
+	if err1 != nil {
+		c.Error("GoEdit 传入roleId参数不合法", "/administrator")
+		return
+	}
+	if password != "" {
+		if len(password) < 6 || common.VerifyEmail(email) == false {
+			c.Error("GoEdit 密码或邮箱不合法", "/administrator")
+		}
+		password = common.Md5(password)
+	}
+	administrator := models.Administrator{Id: id}
+	models.DB.Find(&administrator)
+	administrator.Username = username
+	administrator.Passowrd = password
+	administrator.Mobile = mobile
+	administrator.Email = email
+	administrator.RoleId = roleId
+	err2 := models.DB.Save(&administrator).Error
+	if err2 != nil {
+		c.Error("GoEdit修改管理员失败", "/administrator/edit?id="+strconv.Itoa(id))
+	} else {
+		c.Success("GoEdit修改管理员成功", "/administrator")
+	}
+}
+
+func (c *AdministratorController) Delete() {
+	id, err := c.GetInt("id")
+	if err != nil {
+		c.Error("Delete 传入ID错误", "/role")
+		return
+	}
+	administrator := models.Administrator{Id: id}
+	err1 := models.DB.Delete(&administrator).Error
+	if err1 != nil {
+		c.Error("Delete 删除管理员失败", "/administrator")
+		return
+	} else {
+		c.Success("Delete 删除管理员成功", "/administrator")
+	}
 
 }
