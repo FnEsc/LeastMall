@@ -110,6 +110,4 @@ func (c *BannerController) Delete() {
 	} else {
 		c.Success("Delete banner 轮播图成功，文件已清除", "/banner")
 	}
-
-
 }
